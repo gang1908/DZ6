@@ -2,10 +2,14 @@ import UIKit
 
 var greeting = "Hello, playground"
 
+// TODO: Более логично использовать название в единственном числе - Student. Так как кортеж содержит информации об одном студенте.
 typealias Students = (name: String, age: Int, faculty: Set<String>, grades: [String: Double])
 
 
-
+// TODO: Чтобы протестировать вывод, тебе нужно доработать здесь функцию.
+// Есть 2 варианта либо вынести  var students: [Students] = [] наружу, чтобы потом обращаться к переменной.
+// Либо сделать сосздание массива полностью внутри функции и чтобы она возвращала массив студентов, которых потом можно передеать в другие функции для теста.
+// TODO: Некорректное название функции. Фактически ты добавляешь новых студентов в список, а название printInfo
 func printStudentInfo (_ name: String, _ age: Int, _ faculty: Set<String>,_ grades: [String: Double]) {
     var students: [Students] = []
     var infoResult = (name: name, age: age, faculty: faculty, grades: grades)
@@ -46,6 +50,7 @@ func getTopStudents(student: [Students], top: Int) -> [(name: String, averageGra
             return nil
         }
     }
+    // TODO: Отступы уехали
         let studentSorted = studentsAverageGrade.sorted { $0.averageGrade > $1.averageGrade }
         return Array(studentSorted.prefix(top))
     }
@@ -53,11 +58,14 @@ func getTopStudents(student: [Students], top: Int) -> [(name: String, averageGra
     
   
     func findStudentsByAge(students: [Students], age: Int) -> [Students] {
+        // TODO: Пробелы с внутренних сторон фигурных скобок
         students.filter {$0.age == 21}
     }
     
     
-    
+    // MARK: С точки зрения логики работает все правильно, можно немного упростить.
+    // В одну строку. Set(students.flatMap { $0.faculty })
+    // Мы можем массив привести к множество, в таком случае из массива автоматически уберутся все дубли.
     func getUniqueOptionalSubjects(students: [Students]) -> Set<String> {
         var studentsFaculty = Set<String>()
         var facultyOfStudent = students.flatMap { $0.faculty }
